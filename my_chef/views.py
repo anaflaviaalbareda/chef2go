@@ -1,14 +1,47 @@
 from django.shortcuts import render
-from .models import Colacion, Almuerzos
+from .models import Colacion, Almuerzos, Clases, InscritosClase
 
 # Create your views here.
+
+from django.core.mail import send_mail
+from django.conf import settings
+from django.template import Context
+from django.template.loader import get_template
+
+# Librerias de tiempo
 
 from time import gmtime, strftime
 import datetime
 
+from .forms import Contacto
+
 def index(request):
-	
-	return render(request,'my_chef/index.html')
+	if request.POST:
+		print("paso")
+		nombre=request.POST['Nombre']
+		telefono=request.POST['Telefono']
+		email=request.POST['Email']
+		mensaje=request.POST['Mensaje']
+		asunto='contacto_web'
+		contenido= 'Nombre: ' + nombre + '; Telefono: ' + telefono+ '; Email: ' + email + '; Mensaje: ' + mensaje
+		email_from = settings.EMAIL_HOST_USER
+		recipient_list = ['chefrasf@gmail.com',]
+		send_mail( asunto, contenido, email_from, recipient_list,fail_silently = False)
+		alerta='Mensaje Enviado, estamos en contacto contigo'
+		dic={'alerta':alerta,'form':Contacto()}
+		return render(request,'my_chef/index.html',dic)
+	else:
+		alerta=''
+		dic={'alerta':alerta,'form':Contacto()}
+		return render(request,'my_chef/index.html',dic)
+
+def contacto(request):
+	if request.POST:
+		return render(request,'my_chef/contacto.html',dic)
+	else:
+		alerta=''
+		dic={'alerta':alerta}
+		return render(request,'my_chef/contacto.html',dic)
 
 def almuerzos(request):
 	colaciones=Colacion.objects.all()
@@ -37,4 +70,37 @@ def cenas(request):
 	return render(request,'my_chef/cenas.html')
 
 def clases(request):
-	return render(request,'my_chef/clases.html')
+	clases=Clases.objects.all()
+	diccionario={'clases':clases}
+	print(clases[0].gratis)
+	return render(request,'my_chef/clases.html',diccionario)
+
+def inscripcion(request):
+	clase=Clases.objects.get(clases_id=request.POST['clase'])
+	diccionario={'clase':clase}
+	return render(request,'my_chef/inscripcion.html',diccionario)
+
+def pre_confirm(request):
+	clase=Clases.objects.get(clases_id=request.POST['clase'])
+	nombre=request.POST['nombre']
+	email=request.POST['email']
+	telefono=request.POST['telefono']
+	inscrito=InscritosClase(nombre=nombre,email=email,telefono=telefono,clases=clase)
+	inscrito.save()
+
+	template = get_template('my_chef/email.html')
+	context = {'nombre': nombre, 'clase': clase}
+	contenido = template.render(context)
+	email_from = settings.EMAIL_HOST_USER
+	recipient_list = [email,]
+	asunto='Inscripcion a clases chef2GO'
+	send_mail( asunto, contenido, email_from, recipient_list,fail_silently = False)
+
+	diccionario={'clase':clase, 'inscripcion': inscrito}
+	return render(request,'my_chef/pre_confirm.html',diccionario)
+
+def confirmacion(request):
+	return render(request,'my_chef/confirmacion.html')
+
+
+

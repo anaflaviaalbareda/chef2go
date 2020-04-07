@@ -1,3 +1,4 @@
+
 # This is an auto-generated Django model module.
 # You'll have to do the following manually to clean this up:
 #   * Rearrange models' order
@@ -21,6 +22,21 @@ class Almuerzos(models.Model):
         db_table = 'Almuerzos'
 
 
+class Clases(models.Model):
+    clases_id = models.AutoField(primary_key=True)
+    nombre = models.CharField(db_column='Nombre', max_length=255)  # Field name made lowercase.
+    descripcion = models.TextField(db_column='Descripcion')  # Field name made lowercase.
+    ingredientes = models.TextField(db_column='Ingredientes')  # Field name made lowercase.
+    gratis = models.BooleanField(db_column='Pagado',default=False)  # Field name made lowercase.
+
+    class Meta:
+        db_table = 'Clases'
+
+    def __str__(self):
+        # return "name" from translation
+        return self.nombre
+
+
 class Colacion(models.Model):
     idcolacion = models.AutoField(db_column='idColacion', primary_key=True)  # Field name made lowercase.
     entrada = models.CharField(db_column='Entrada', max_length=45, blank=True, null=True)  # Field name made lowercase.
@@ -36,6 +52,20 @@ class Colacion(models.Model):
     class Meta:
         managed = False
         db_table = 'Colacion'
+
+
+class InscritosClase(models.Model):
+    insc_id = models.AutoField(primary_key=True)
+    nombre = models.CharField(db_column='Nombre', max_length=55, blank=True, null=True)  # Field name made lowercase.
+    telefono = models.CharField(db_column='Telefono', max_length=55, blank=True, null=True)  # Field name made lowercase.
+    email = models.CharField(db_column='Email', max_length=55, blank=True, null=True)  # Field name made lowercase.
+    pagado = models.IntegerField(db_column='Pagado',default=False)  # Field name made lowercase.
+    clases = models.ForeignKey(Clases, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'Inscritos_clase'
+        unique_together = (('insc_id', 'clases'),)
 
 
 class AuthGroup(models.Model):

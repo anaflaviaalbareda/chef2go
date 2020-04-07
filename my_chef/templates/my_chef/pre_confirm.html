@@ -102,8 +102,8 @@ body{font-family: Roboto;}blockquote{border-color: #e34e4e;}.display-1{font-fami
     
 
     <div class="mbr-container">
-        <h2 class="mbr-title align-center mbr-fonts-style mbr-bold mbr-white display-1">ALMUERZOS</h2>
-        <h3 class="mbr-section-subtitle align-center mbr-light mbr-fonts-style mbr-white display-5"><em>Elige uno de nuestros almuerzos disponibles cada día. Reserva haciendo click en el boton junto a la opcion.</em></h3>
+        <h2 class="mbr-title align-center mbr-fonts-style mbr-bold mbr-white display-1">Inscripcion de clases</h2>
+        <h3 class="mbr-section-subtitle align-center mbr-light mbr-fonts-style mbr-white display-5"><em>Revisa los datos y realiza tu pago. (Si el modulo es gratuito dale click en aceptar y listo!)</em></h3>
         
     </div>
 </section>
@@ -113,71 +113,31 @@ body{font-family: Roboto;}blockquote{border-color: #e34e4e;}.display-1{font-fami
     
 
     <div class="mbr-container">
-        <h2 class="mbr-title align-center mbr-fonts-style mbr-bold display-5">Reserva tu almuerzo para el: {{colacion.dia}}</h2>
+        <h2 class="mbr-title align-center mbr-fonts-style mbr-bold display-5">Tu inscripción para la clase online {{clase.nombre}} </h2>
         
         
     </div>
 </section>
 
 <section class="info2 cid-rThsH2KJjf" id="info2-e">
-
-    
-
-    <div class="container">
-        <h4 class="align-center mbr-fonts-style mbr-light display-2">Completa los datos a continuación y realiza tu reserva</h4>
-
+ 	<div class="container">
         <div class="mbr-row mbr-justify-content-center">
-            <div class="mbr-col-lg-6  mbr-col-md-10 " data-form-type="formoid">
-            	<form action='../reservas_add/' method="post" enctype="multipart/form-data">
-					{% csrf_token %}
-					<input type="hidden" name="colacion" value={{colacion.idcolacion}}>
-					<input placeholder="Nombre" class="field-input" type="text" name="nombre">
-					<br>
-					<input placeholder="Telefono" class="field-input" type="text" name="telefono">
-					<br>
-					<input placeholder="Dirección" class="field-input" type="text" name="direccion">
-					<br>
-					<select placeholder="Opcion" class="field-input" name="opcion">
-						<option value="con_postre">Con Postre</option>
-						<option value="sin_postre">Sin Postre</option>
-					</select>
-					<br>
-                	<button type="submit" class="btn btn-primary btn-form display-4">RESERVAR</button>
-                </form>
+            <div class="mbr-col-sm-12 mbr-col-md-6 mbr-col-lg-8">
+                <h2 class="mbr-section-title align-right mbr-fonts-style mbr-bold display-2">Detalles de inscripcion</h2>
+                <h3 class="mbr-section-subtitle align-right mbr-fonts-style mbr-light display-7">Nombre : {{inscripcion.nombre}}<br> Telefono: {{inscripcion.telefono}} <br> Email : {{inscripcion.email}}<br><strong>Precio: {% if clase.gratis == True %} Gratis {% else %} 2.500 {% endif %}</strong><br></h3>
+                {% if clase.gratis == True %}
+                <a class="btn btn-primary btn-form display-4" href="../confirmacion">Aceptar</a>
+                {% else %}
+                <a mp-mode="dftl" href="https://www.mercadopago.cl/checkout/v1/redirect?pref_id=543491467-b235ff52-fbb7-445d-83f7-23a557599ccc" name="MP-payButton" class='btn btn-primary btn-form display-4'>Pagar</a>
+				<script type="text/javascript">
+				(function(){function $MPC_load(){window.$MPC_loaded !== true && (function(){var s = document.createElement("script");s.type = "text/javascript";s.async = true;s.src = document.location.protocol+"//secure.mlstatic.com/mptools/render.js";var x = document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);window.$MPC_loaded = true;})();}window.$MPC_loaded !== true ? (window.attachEvent ?window.attachEvent('onload', $MPC_load) : window.addEventListener('load', $MPC_load, false)) : null;})();
+				</script>
+                {% endif %}
             </div>
         </div>
     </div>
 </section>
 
-<section class="mbr-section content1 cid-rTjEAaNWAo" id="content1-w">
-
-    
-
-    <div class="mbr-container">
-        <h2 class="mbr-title align-center mbr-fonts-style mbr-bold display-5">Revisa nuestra zona de reparto para almuerzos</h2>
-        
-        
-    </div>
-</section>
-
-<section class="map cid-rTjEoMGnh2" id="map1-v">
-
-    
-    <div class="mbr-row mbr-justify-content-center">
-        <div class="map-title mbr-col-sm-12 mbr-col-md-12 align-center">
-            
-        </div>
-        <div class="google-map"><amp-iframe src="https://www.google.com/maps/d/u/1/embed?mid=1n8KWyDfsn-2XpdYqsbsrphOqP92GTNdb" height="400" layout="fill" sandbox="allow-scripts allow-same-origin                                 allow-popups" frameborder="0" class="mobirise-loader">
-            <div placeholder="" class="placeholder">
-                                <div class="mobirise-spinner">
-                                    <em></em>
-                                    <em></em>
-                                    <em></em>
-                                </div></div>
-        </amp-iframe></div>
-        
-    </div>
-</section>
 
 
   

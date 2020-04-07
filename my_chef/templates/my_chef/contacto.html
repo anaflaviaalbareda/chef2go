@@ -93,94 +93,24 @@ body{font-family: Roboto;}blockquote{border-color: #e34e4e;}.display-1{font-fami
     </nav>
 
   <!-- AMP plug -->
-    
 
-</section>
 
-<section class="engine"><a href="https://mobirise.info">Mobirise</a></section><section class="mbr-section content19 cid-rThrRhIAO7" id="content19-b">
+			<form action='../contacto/' method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				<input placeholder="Nombre" class="field-input" type="text" name="Nombre">
+				<br>
+				<input placeholder="Telefono" class="field-input" type="tel" name="Telefono">
+				<br>
+				<input placeholder="Email" class="field-input" type="email" name="Email">
+				<br>
+				<input class="field-input" rows="7" name="Mensaje" placeholder="Mensaje">
+				<br>
+				<a type="submit" class="btn btn-primary btn-form display-4">RESERVAR</a>
+			</form>
 
-    
 
-    <div class="mbr-container">
-        <h2 class="mbr-title align-center mbr-fonts-style mbr-bold mbr-white display-1">ALMUERZOS</h2>
-        <h3 class="mbr-section-subtitle align-center mbr-light mbr-fonts-style mbr-white display-5"><em>Elige uno de nuestros almuerzos disponibles cada día. Reserva haciendo click en el boton junto a la opcion.</em></h3>
-        
-    </div>
-</section>
 
-<section class="mbr-section content1 cid-rTjFs7soq0" id="content1-y">
 
-    
-
-    <div class="mbr-container">
-        <h2 class="mbr-title align-center mbr-fonts-style mbr-bold display-5">Reserva tu almuerzo para el: {{colacion.dia}}</h2>
-        
-        
-    </div>
-</section>
-
-<section class="info2 cid-rThsH2KJjf" id="info2-e">
-
-    
-
-    <div class="container">
-        <h4 class="align-center mbr-fonts-style mbr-light display-2">Completa los datos a continuación y realiza tu reserva</h4>
-
-        <div class="mbr-row mbr-justify-content-center">
-            <div class="mbr-col-lg-6  mbr-col-md-10 " data-form-type="formoid">
-            	<form action='../reservas_add/' method="post" enctype="multipart/form-data">
-					{% csrf_token %}
-					<input type="hidden" name="colacion" value={{colacion.idcolacion}}>
-					<input placeholder="Nombre" class="field-input" type="text" name="nombre">
-					<br>
-					<input placeholder="Telefono" class="field-input" type="text" name="telefono">
-					<br>
-					<input placeholder="Dirección" class="field-input" type="text" name="direccion">
-					<br>
-					<select placeholder="Opcion" class="field-input" name="opcion">
-						<option value="con_postre">Con Postre</option>
-						<option value="sin_postre">Sin Postre</option>
-					</select>
-					<br>
-                	<button type="submit" class="btn btn-primary btn-form display-4">RESERVAR</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="mbr-section content1 cid-rTjEAaNWAo" id="content1-w">
-
-    
-
-    <div class="mbr-container">
-        <h2 class="mbr-title align-center mbr-fonts-style mbr-bold display-5">Revisa nuestra zona de reparto para almuerzos</h2>
-        
-        
-    </div>
-</section>
-
-<section class="map cid-rTjEoMGnh2" id="map1-v">
-
-    
-    <div class="mbr-row mbr-justify-content-center">
-        <div class="map-title mbr-col-sm-12 mbr-col-md-12 align-center">
-            
-        </div>
-        <div class="google-map"><amp-iframe src="https://www.google.com/maps/d/u/1/embed?mid=1n8KWyDfsn-2XpdYqsbsrphOqP92GTNdb" height="400" layout="fill" sandbox="allow-scripts allow-same-origin                                 allow-popups" frameborder="0" class="mobirise-loader">
-            <div placeholder="" class="placeholder">
-                                <div class="mobirise-spinner">
-                                    <em></em>
-                                    <em></em>
-                                    <em></em>
-                                </div></div>
-        </amp-iframe></div>
-        
-    </div>
-</section>
 
 
   
-  
-</body>
-</html>
