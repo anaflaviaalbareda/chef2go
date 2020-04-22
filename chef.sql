@@ -80,17 +80,21 @@ CREATE TABLE `Colacion` (
 DROP TABLE IF EXISTS `Inscritos_clase`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `Inscritos_clase` (
-  `insc_id` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre` varchar(55) DEFAULT NULL,
-  `Telefono` varchar(55) DEFAULT NULL,
-  `Email` varchar(55) DEFAULT NULL,
-  `Pagado` tinyint(1) NOT NULL DEFAULT '0',
-  `clases_id` int(11) NOT NULL,
-  PRIMARY KEY (`insc_id`,`clases_id`),
-  KEY `clases_id` (`clases_id`),
-  CONSTRAINT `inscritos_clase_ibfk_1` FOREIGN KEY (`clases_id`) REFERENCES `clases` (`clases_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `Inscritos_clase` (
+  `insc_id` INT NOT NULL AUTO_INCREMENT,
+  `Nombre` VARCHAR(55) NULL,
+  `Telefono` VARCHAR(55) NULL,
+  `Email` VARCHAR(55) BINARY NULL,
+  `Pagado` TINYINT(1) NOT NULL DEFAULT 0,
+  `clases_id` INT NOT NULL,
+  PRIMARY KEY (`insc_id`, `clases_id`),
+  INDEX `fk_Inscritos_clase_Clases_idx` (`clases_id` ASC),
+  CONSTRAINT `fk_Inscritos_clase_Clases`
+    FOREIGN KEY (`clases_id`)
+    REFERENCES `Clases` (`clases_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 

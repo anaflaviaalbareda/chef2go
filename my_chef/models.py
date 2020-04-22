@@ -59,7 +59,7 @@ class InscritosClase(models.Model):
     nombre = models.CharField(db_column='Nombre', max_length=55, blank=True, null=True)  # Field name made lowercase.
     telefono = models.CharField(db_column='Telefono', max_length=55, blank=True, null=True)  # Field name made lowercase.
     email = models.CharField(db_column='Email', max_length=55, blank=True, null=True)  # Field name made lowercase.
-    pagado = models.IntegerField(db_column='Pagado',default=False)  # Field name made lowercase.
+    pagado = models.BooleanField(db_column='Pagado',default=False)  # Field name made lowercase.
     clases = models.ForeignKey(Clases, models.DO_NOTHING)
 
     class Meta:

@@ -72,7 +72,6 @@ def cenas(request):
 def clases(request):
 	clases=Clases.objects.all()
 	diccionario={'clases':clases}
-	print(clases[0].gratis)
 	return render(request,'my_chef/clases.html',diccionario)
 
 def inscripcion(request):

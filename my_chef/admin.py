@@ -19,7 +19,13 @@ class ClasesAdmin(admin.ModelAdmin):
 admin.site.register(Clases,ClasesAdmin)
 
 class InscritosClaseAdmin(admin.ModelAdmin):
-	list_display = ('insc_id','nombre','telefono','email','pagado')
-	list_filter = ('pagado','clases')
+	list_display = ('insc_id','nombre','telefono','email','pagado','clases')
+
+	def clases_nombre(self, obj):
+		return obj.clases.nombre
+
+	clases_nombre.admin_order_field = 'clases__titulo'
+
+	list_filter = ('pagado','clases__nombre',)
 
 admin.site.register(InscritosClase,InscritosClaseAdmin)

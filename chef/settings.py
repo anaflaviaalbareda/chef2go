@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 
 import pymysql
+pymysql.version_info = (1, 3, 13, "final", 0)
 pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -28,7 +29,7 @@ SECRET_KEY = 'i5f6eegdzixg3o#e=3@8p$$q#44+khotw_h0t0je2yzdtv4d-#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['chef2go.pythonanywhere.com']
 
 
 # Application definition
@@ -81,10 +82,10 @@ WSGI_APPLICATION = 'chef.wsgi.application'
 DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'chef',
-        'USER': 'root',
-        'PASSWORD':'anita458',
-        'HOST':'localhost',
+        'NAME':'chef2go$chef',
+        'USER': 'chef2go',
+        'PASSWORD':'anita123',
+        'HOST':'chef2go.mysql.pythonanywhere-services.com',
         'PORT':'3306',
         }
 }
@@ -127,6 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT='/home/chef2go/chef2go/static/'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
